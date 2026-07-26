@@ -208,7 +208,7 @@ section.visible {
   width: 100%;
   height: 100%;
   border-radius: 24px;
-  background-image: url('IMAGES/Lerato.JPG');
+  background-image: url('IMAGES/Lerato.jpg');
   background-size: cover;
   background-position: center;
   background-color: var(--bg);
