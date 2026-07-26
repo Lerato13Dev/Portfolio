@@ -1,0 +1,657 @@
+/* ==========================================================================
+   1. VARIABLES & RESET
+   ========================================================================== */
+
+:root {
+  --bg: #0a0c10;
+  --bg-surface: #11141a;
+  --accent: #b8876e;
+  --accent-bright: #e0b098;
+  --text-main: #f0f4f1;
+  --text-muted: #7e8c83;
+  --border-line: #1c232b;
+  --max-width: 1300px;
+  --sidebar-width: 90px;
+  --header-height-mobile: 70px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  perspective: 1200px;
+}
+
+h1, h2, h3, .massive-num {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.03em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ==========================================================================
+   2. GLOBAL LAYOUT & SECTION REVEAL
+   ========================================================================== */
+
+section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.215, 0.61, 0.355, 1), 
+              transform 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+  padding: 100px 0;
+  border-bottom: 1px solid var(--border-line);
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Ensure ALL section contents respect the desktop right sidebar boundary */
+.hero-canvas,
+.profile-structural-flex,
+.bento-skills-container,
+.strip-container,
+.minimal-contact-box {
+  padding-right: var(--sidebar-width);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   3. NAVIGATION (SIDEBAR & MOBILE HEADER)
+   ========================================================================== */
+
+.sidebar-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: var(--sidebar-width);
+  border-left: 1px solid var(--border-line);
+  background: rgba(10, 12, 16, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.nav-brand {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+.vertical-links {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.vertical-links a {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transition: color 0.3s ease;
+}
+
+.vertical-links a:hover {
+  color: var(--accent-bright);
+}
+
+/* ==========================================================================
+   4. HERO SECTION
+   ========================================================================== */
+
+.hero-canvas {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  position: relative;
+}
+
+.hero-structural-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  width: 100%;
+  gap: 60px;
+  align-items: center;
+}
+
+.hero-statement h1 {
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  line-height: 0.95;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.hero-statement h1 span {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(240, 244, 241, 0.3);
+}
+
+.hero-statement .subtitle {
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-bottom: 32px;
+  font-weight: 300;
+}
+
+.hero-statement .meta-paragraph {
+  color: var(--text-muted);
+  max-width: 550px;
+  font-size: 1.1rem;
+  margin-bottom: 48px;
+}
+
+.interactive-tilt {
+  transition: transform 0.1s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.showcase-block {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 440px;
+  justify-self: center;
+}
+
+.abstract-graphic-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 40px;
+  border: 1px solid var(--border-line);
+  background: radial-gradient(circle at 30% 30%, var(--bg-surface), transparent);
+  padding: 20px;
+}
+
+.avatar-inner-frame {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  background-image: url('images/Lerato.jpg');
+  background-size: cover;
+  background-position: center;
+  background-color: var(--bg);
+  display: flex;
+  align-items: flex-end;
+  padding: 30px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.avatar-inner-frame .badge {
+  background: rgba(10, 12, 16, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-line);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  color: var(--accent-bright);
+}
+
+/* ==========================================================================
+   5. PROFILE & EDUCATION SECTION
+   ========================================================================== */
+
+.profile-structural-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.section-indicator {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.split-editorial {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 40px;
+}
+
+.split-editorial h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.1;
+}
+
+.split-editorial .main-bio-text {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+.asymmetric-data-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.educational-anchor-block {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  padding: 40px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 260px;
+  transition: border-color 0.3s ease;
+}
+
+.educational-anchor-block:hover {
+  border-color: var(--accent);
+}
+
+.massive-num {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: rgba(184, 135, 110, 0.15);
+  line-height: 1;
+}
+
+.educational-anchor-block h4 {
+  font-size: 1.25rem;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.educational-anchor-block p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.institutional-action-tag {
+  margin-top: auto;
+  padding-top: 20px;
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==========================================================================
+   6. SKILLS SECTION (BENTO GRID)
+   ========================================================================== */
+
+.bento-skills-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.bento-cell {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.cell-wide {
+  grid-column: span 2;
+}
+
+.bento-cell h3 {
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+  color: #ffffff;
+}
+
+.linear-skill-track {
+  margin-bottom: 24px;
+}
+
+.linear-skill-track:last-child {
+  margin-bottom: 0;
+}
+
+.track-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+}
+
+.track-line {
+  height: 4px;
+  background: var(--bg);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.track-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.cloud-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cloud-tags span {
+  background: var(--bg);
+  border: 1px solid var(--border-line);
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   7. PROJECTS SECTION
+   ========================================================================== */
+
+.strip-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 40px; /* CREATES CLEAR VERTICAL SPACE FROM THE SECTION ABOVE */
+}
+
+.project-strip {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  align-items: stretch;
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.project-strip:hover {
+  border-color: var(--accent);
+}
+
+/* Visual Left Panel */
+.strip-visual-accent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+  min-height: 200px;
+}
+
+.vis-1 {
+  background: linear-gradient(135deg, #1c232b, #b8876e);
+}
+
+.vis-2 {
+  background: linear-gradient(135deg, #11141a, #2c353f);
+}
+
+.vis-3 {
+  background: linear-gradient(135deg, #b8876e, #0a0c10);
+}
+
+.strip-visual-accent a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.project-preview {
+  width: 100%;
+  height: auto;
+  max-height: 160px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.35s ease;
+}
+
+.project-strip:hover .project-preview {
+  transform: scale(1.03);
+}
+
+/* Details Right Panel */
+.strip-details {
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.strip-details h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.strip-details p {
+  color: var(--text-muted);
+  max-width: 650px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.strip-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.strip-tags span {
+  font-size: 0.8rem;
+  background: var(--bg);
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border-line);
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   8. CONTACT SECTION
+   ========================================================================== */
+
+.minimal-contact-box {
+  text-align: center;
+}
+
+.minimal-contact-box h2 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1;
+  margin-bottom: 24px;
+}
+
+.link-structural-group {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+
+.architect-link {
+  font-size: 1.1rem;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-line);
+  padding-bottom: 6px;
+  transition: all 0.3s ease;
+}
+
+.architect-link:hover {
+  color: var(--accent-bright);
+  border-color: var(--accent-bright);
+}
+
+/* ==========================================================================
+   9. MEDIA QUERIES (RESPONSIVE BREAKPOINTS)
+   ========================================================================== */
+
+/* Laptop & Tablet Layouts */
+@media (max-width: 1024px) {
+  .hero-canvas,
+  .profile-structural-flex,
+  .bento-skills-container,
+  .strip-container,
+  .minimal-contact-box {
+    padding-right: 0;
+  }
+
+  section {
+    padding: 80px 0;
+  }
+
+  /* Top horizontal navbar on smaller devices */
+  .sidebar-nav {
+    width: 100%;
+    height: var(--header-height-mobile);
+    border-left: none;
+    border-bottom: 1px solid var(--border-line);
+    flex-direction: row;
+    padding: 0 40px;
+  }
+
+  .vertical-links {
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .vertical-links a {
+    writing-mode: horizontal-tb;
+  }
+
+  /* Hero Adjustments */
+  .hero-canvas {
+    padding-top: calc(var(--header-height-mobile) + 60px);
+    padding-bottom: 60px;
+    min-height: auto;
+  }
+
+  .hero-structural-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .showcase-block {
+    max-width: 360px;
+  }
+
+  /* Grid Adjustments */
+  .split-editorial {
+    grid-template-columns: 1fr;
+  }
+
+  .asymmetric-data-row {
+    grid-template-columns: 1fr;
+  }
+
+  .bento-skills-container {
+    grid-template-columns: 1fr;
+  }
+
+  .cell-wide {
+    grid-column: span 1;
+  }
+
+  /* Project Cards Stacked on Tablet & Mobile */
+  .project-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .strip-visual-accent {
+    min-height: 180px;
+    padding: 20px;
+  }
+
+  .project-preview {
+    max-height: 160px;
+  }
+
+  .strip-details {
+    padding: 24px 20px;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 600px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .sidebar-nav {
+    padding: 0 20px;
+  }
+
+  .vertical-links {
+    gap: 16px;
+  }
+
+  .vertical-links a {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+
+  section {
+    padding: 60px 0;
+  }
+
+  .bento-cell,
+  .educational-anchor-block {
+    padding: 24px;
+  }
+
+  .strip-details {
+    padding: 24px 18px;
+  }
+
+  .link-structural-group {
+    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+  }
+}
