@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lerato Makhoba | Software Developer Portfolio</title>
+<meta name="description" content="Portfolio of Lerato Makhoba, final-year BSc Information Technology student at North-West University. Projects, skills and contact details.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="sidebar-nav" aria-label="Main">
+  <a class="nav-brand" href="#home" aria-label="Lerato Makhoba, home">L.M</a>
+  <div class="vertical-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="nav-assistant" id="open-assistant" type="button" aria-haspopup="dialog" aria-controls="assistant">
+    <span class="status-dot" data-state="idle" aria-hidden="true"></span><span>Ask</span>
+  </button>
+</nav>
+
+<main id="main">
+<section id="home" class="hero-canvas reveal">
+  <div class="container hero-grid">
+    <div class="hero-statement">
+      <p class="role-line" id="hero-role"></p>
+      <h1>Lerato<span>Makhoba</span></h1>
+      <p class="subtitle" id="hero-tagline"></p>
+      <p class="meta-paragraph" id="hero-intro"></p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">View projects</a>
+        <button class="btn" type="button" id="hero-assistant">Talk to the assistant</button>
+        <a class="btn" id="hero-cv" href="#" hidden download>Download CV</a>
+      </div>
+    </div>
+    <div class="showcase-block interactive-tilt">
+      <div class="avatar-frame">
+        <img src="IMAGES/Lerato.JPG" alt="Portrait of Lerato Makhoba" width="440" height="440" onerror="this.remove()">
+        <span class="badge">North-West University</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="container reveal" aria-labelledby="about-h">
+  <div class="split">
+    <h2 id="about-h">About me</h2>
+    <p class="lead" id="about-bio"></p>
+  </div>
+  <div class="card-row">
+    <article class="card">
+      <h3>Education</h3>
+      <div id="education"></div>
+    </article>
+    <article class="card card-wide">
+      <h3>How I solve problems</h3>
+      <ol class="approach" id="approach"></ol>
+    </article>
+  </div>
+</section>
+
+<section id="skills" class="container reveal" aria-labelledby="skills-h">
+  <h2 id="skills-h">Skills</h2>
+  <p class="section-note">Each skill lists the projects on this page where I have used it.</p>
+  <div class="skills-grid" id="skills-grid"></div>
+</section>
+
+<section id="projects" class="container reveal" aria-labelledby="projects-h">
+  <h2 id="projects-h">Projects</h2>
+  <div class="project-controls">
+    <div class="filters" id="filters" role="group" aria-label="Filter projects by category"></div>
+    <label class="search">
+      <span class="visually-hidden">Search projects</span>
+      <input type="search" id="project-search" placeholder="Search by name or technology" autocomplete="off">
+    </label>
+  </div>
+  <p class="section-note" id="project-count" aria-live="polite"></p>
+  <div class="project-grid" id="project-grid"></div>
+
+  <h3 class="sub-h">Certificates</h3>
+  <div class="cert-row" id="credentials"></div>
+</section>
+
+<section id="contact" class="container reveal" aria-labelledby="contact-h" style="border-bottom:none">
+  <div class="contact-box">
+    <h2 id="contact-h">Get in touch</h2>
+    <p class="section-note">I'm looking for internship and graduate opportunities.</p>
+    <div class="link-group" id="contact-links"></div>
+    <p class="footnote">&copy; 2026 Lerato Makhoba</p>
+  </div>
+</section>
+</main>
+
+<!-- Project detail dialog -->
+<dialog id="project-dialog" aria-labelledby="pd-title">
+  <button class="dialog-close" type="button" id="pd-close" aria-label="Close project details">Close</button>
+  <div class="pd-body" id="pd-body"></div>
+</dialog>
+
+<!-- Portfolio assistant -->
+<aside id="assistant" class="assistant" role="dialog" aria-label="Portfolio assistant" hidden>
+  <header class="as-head">
+    <div>
+      <strong>Lerato's Portfolio Assistant</strong>
+      <span class="as-status"><span class="status-dot" data-state="idle" aria-hidden="true"></span><span id="as-status-text">Idle</span></span>
+    </div>
+    <button type="button" id="as-close" class="icon-btn" aria-label="Close assistant">&times;</button>
+  </header>
+  <p class="as-note" id="as-note">A command assistant, not an AI model. It answers from the data on this page.</p>
+  <div class="as-log" id="as-log" role="log" aria-live="polite"></div>
+  <p class="as-transcript" id="as-transcript" aria-live="off"></p>
+  <div class="as-controls">
+    <button type="button" id="as-mic" class="mic" aria-pressed="false">Start listening</button>
+    <button type="button" id="as-replay" class="icon-btn" title="Replay last answer">Replay</button>
+    <button type="button" id="as-mute" class="icon-btn" aria-pressed="false" title="Mute spoken answers">Mute</button>
+    <button type="button" id="as-stop" class="icon-btn" title="Stop speaking and listening">Stop</button>
+  </div>
+  <form class="as-form" id="as-form">
+    <label class="visually-hidden" for="as-input">Type a command</label>
+    <input id="as-input" type="text" placeholder="Type a question" autocomplete="off">
+    <button type="submit" class="icon-btn">Send</button>
+  </form>
+  <div class="as-chips" id="as-chips" aria-label="Suggested commands"></div>
+</aside>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
